@@ -1,4 +1,6 @@
 using FluentValidation;
+using ScrumTeamService.Constants;
+using ScrumTeamService.Extensions;
 using ScrumTeamService.Models;
 
 namespace ScrumTeamService.Services;
@@ -22,7 +24,7 @@ public sealed class TeamMemberService : ITeamMemberService
     
     public async Task CreateTeamMemberAsync(TeamMember teamMember)
     {
-        
+        await _validator.ValidateAsync(teamMember, ValidationConstants.CreateTeamMemberValidationMessage, _logger);
     }
 
     public async Task<IReadOnlyCollection<TeamMember>> GetAllTeamMembersAsync()
@@ -37,6 +39,6 @@ public sealed class TeamMemberService : ITeamMemberService
 
     public async Task UpdateTeamMemberAsync(TeamMember teamMember)
     {
-        
+        await _validator.ValidateAsync(teamMember, ValidationConstants.UpdateTeamMemberValidationMessage, _logger);
     }
 }

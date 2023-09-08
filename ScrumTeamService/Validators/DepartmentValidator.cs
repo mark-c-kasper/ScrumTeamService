@@ -7,7 +7,7 @@ public sealed class DepartmentValidator : AbstractValidator<Department>
 {
     public DepartmentValidator()
     {
-        RuleFor(x => x.Name).NotNull();
-        RuleFor(x => x.Name).NotEmpty();
+        RuleFor(d => d.Name).NotNull();
+        RuleFor(d => d.Name).NotEmpty();
     }
 }

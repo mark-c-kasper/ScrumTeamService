@@ -1,4 +1,6 @@
 using FluentValidation;
+using ScrumTeamService.Constants;
+using ScrumTeamService.Extensions;
 using ScrumTeamService.Models;
 
 namespace ScrumTeamService.Services;
@@ -21,6 +23,7 @@ public sealed class ScrumOrganizationService : IScrumOrganizationService
     
     public async Task CreateScrumOrganizationAsync(ScrumOrganization organization)
     {
+        await _validator.ValidateAsync(organization, ValidationConstants.CreateScrumOrganizationValidationMessage, _logger);
         
     }
 
@@ -36,6 +39,6 @@ public sealed class ScrumOrganizationService : IScrumOrganizationService
 
     public async Task UpdateScrumOrganizationAsync(ScrumOrganization organization)
     {
-        
+        await _validator.ValidateAsync(organization, ValidationConstants.UpdateScrumOrganizationValidationMessage, _logger);
     }
 }

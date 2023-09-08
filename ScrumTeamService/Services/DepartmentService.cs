@@ -1,5 +1,7 @@
 using FluentValidation;
 using ScrumTeamService.Models;
+using ScrumTeamService.Extensions;
+using ScrumTeamService.Constants;
 
 namespace ScrumTeamService.Services;
 
@@ -22,13 +24,7 @@ public sealed class DepartmentService : IDepartmentService
     
     public async Task CreateDepartmentAsync(Department department)
     {
-        var validationResults = await _validator.ValidateAsync(department);
-
-        if (!validationResults.IsValid)
-        {
-            _logger.LogWarning("Encountered issue validating creating department");
-            throw new ValidationException(validationResults.Errors);
-        }
+        await _validator.ValidateAsync(department, ValidationConstants.CreateDepartmentValidationMessage, _logger);
         
     }
 
@@ -44,12 +40,6 @@ public sealed class DepartmentService : IDepartmentService
 
     public async Task UpdateDepartmentAsync(Department department)
     {
-        var validationResults = await _validator.ValidateAsync(department);
-
-        if (!validationResults.IsValid)
-        {
-            _logger.LogWarning("Encountered issue validating creating department");
-            throw new ValidationException(validationResults.Errors);
-        }
+        await _validator.ValidateAsync(department, ValidationConstants.UpdateDepartmentValidationMessage, _logger);
     }
 }

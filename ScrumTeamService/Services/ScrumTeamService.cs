@@ -1,4 +1,6 @@
 using FluentValidation;
+using ScrumTeamService.Constants;
+using ScrumTeamService.Extensions;
 using ScrumTeamService.Models;
 
 namespace ScrumTeamService.Services;
@@ -21,6 +23,8 @@ public sealed class ScrumTeamService : IScrumTeamService
     
     public async Task CreateScrumTeamAsync(ScrumTeam scrumTeam)
     {
+        await _validator.ValidateAsync(scrumTeam, ValidationConstants.CreateScrumTeamValidationMessage, _logger);
+        
         
     }
 
@@ -36,6 +40,6 @@ public sealed class ScrumTeamService : IScrumTeamService
 
     public async Task UpdateScrumTeamAsync(ScrumTeam scrumTeam)
     {
-        
+        await _validator.ValidateAsync(scrumTeam, ValidationConstants.UpdateScrumTeamValidationMessage, _logger);
     }
 }
