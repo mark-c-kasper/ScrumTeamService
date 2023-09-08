@@ -4,11 +4,11 @@ namespace ScrumTeamService.Services;
 
 public interface ITeamMemberService
 {
-    Task CreateTeamMemberAsync(TeamMember teamMember);
-    
     Task<IReadOnlyCollection<TeamMember>> GetAllTeamMembersAsync();
     
-    Task<TeamMember> GetTeamMemberById(string guid);
+    Task<TeamMember> GetTeamMemberById(string id);
+    
+    Task CreateTeamMemberAsync(TeamMember teamMember);
     
     Task UpdateTeamMemberAsync(TeamMember teamMember);
 }

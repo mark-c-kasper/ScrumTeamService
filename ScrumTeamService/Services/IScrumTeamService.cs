@@ -4,11 +4,11 @@ namespace ScrumTeamService.Services;
 
 public interface IScrumTeamService
 {
-    Task CreateScrumTeamAsync(ScrumTeam scrumTeam);
-    
     Task<IReadOnlyCollection<ScrumTeam>> GetAllScrumTeamsAsync();
     
-    Task<ScrumTeam> GetScrumTeamById(string guid);
+    Task<ScrumTeam> GetScrumTeamById(string id);
+    
+    Task CreateScrumTeamAsync(ScrumTeam scrumTeam);
     
     Task UpdateScrumTeamAsync(ScrumTeam scrumTeam);
 }

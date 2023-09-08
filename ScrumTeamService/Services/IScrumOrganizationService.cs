@@ -4,11 +4,11 @@ namespace ScrumTeamService.Services;
 
 public interface IScrumOrganizationService
 {
-    Task CreateScrumOrganizationAsync(ScrumOrganization organization);
-    
     Task<IReadOnlyCollection<ScrumOrganization>> GetAllScrumOrganizationsAsync();
     
-    Task<ScrumOrganization> GetScrumOrganizationById(string guid);
+    Task<ScrumOrganization> GetScrumOrganizationById(string id);
+    
+    Task CreateScrumOrganizationAsync(ScrumOrganization organization);
     
     Task UpdateScrumOrganizationAsync(ScrumOrganization organization);
 }
