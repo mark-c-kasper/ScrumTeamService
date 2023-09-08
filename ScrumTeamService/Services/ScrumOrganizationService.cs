@@ -1,14 +1,22 @@
+using FluentValidation;
 using ScrumTeamService.Models;
 
 namespace ScrumTeamService.Services;
 
 public sealed class ScrumOrganizationService : IScrumOrganizationService
 {
-    private readonly ILogger<ScrumOrganizationService> _logger;
+    private readonly IDynamoDbService _dynamoDbService;
     
-    public ScrumOrganizationService(ILogger<ScrumOrganizationService> logger)
+    private readonly ILogger<ScrumOrganizationService> _logger;
+
+    private readonly IValidator<ScrumOrganization> _validator;
+    
+    public ScrumOrganizationService(IDynamoDbService dynamoDbService, ILogger<ScrumOrganizationService> logger,
+        IValidator<ScrumOrganization> validator)
     {
+        _dynamoDbService = dynamoDbService;
         _logger = logger;
+        _validator = validator;
     }
     
     public async Task CreateScrumOrganizationAsync(ScrumOrganization organization)

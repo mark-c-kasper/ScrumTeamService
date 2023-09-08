@@ -1,6 +1,6 @@
 namespace ScrumTeamService.Services;
 
-public sealed class DynamoDbService
+public sealed class DynamoDbService : IDynamoDbService
 {
     private ILogger<DynamoDbService> _logger;
     

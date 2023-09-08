@@ -1,14 +1,23 @@
+using FluentValidation;
 using ScrumTeamService.Models;
 
 namespace ScrumTeamService.Services;
 
 public sealed class TeamMemberService : ITeamMemberService
 {
-    private readonly ILogger<TeamMemberService> _logger;
+    private readonly IDynamoDbService _dynamoDbService;
     
-    public TeamMemberService(ILogger<TeamMemberService> logger)
+    private readonly ILogger<TeamMemberService> _logger;
+
+    private readonly IValidator<TeamMember> _validator;
+    
+    public TeamMemberService(IDynamoDbService dynamoDbService,
+        ILogger<TeamMemberService> logger,
+        IValidator<TeamMember> validator)
     {
+        _dynamoDbService = dynamoDbService;
         _logger = logger;
+        _validator = validator;
     }
     
     public async Task CreateTeamMemberAsync(TeamMember teamMember)

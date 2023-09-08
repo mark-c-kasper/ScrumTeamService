@@ -9,13 +9,14 @@
   <component name="ChangeListManager">
     <list default="true" id="00a19085-dd30-4db2-aa20-f937ceeb7a73" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ScrumTeamService/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ScrumTeamService/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ScrumTeamService/Controllers/OrganizationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ScrumTeamService/Controllers/ScrumOrganizationController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ScrumTeamService/Controllers/ScrumTeamController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ScrumTeamService/Controllers/ScrumTeamController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ScrumTeamService/Controllers/TeamMemberController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ScrumTeamService/Controllers/TeamMemberController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ScrumTeamService/Controllers/WeatherForecastController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ScrumTeamService/Extensions/WebApplicationBuilderExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ScrumTeamService/Extensions/WebApplicationBuilderExtensions.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ScrumTeamService/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ScrumTeamService/Program.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ScrumTeamService/ScrumTeamService.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ScrumTeamService/ScrumTeamService.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ScrumTeamService/WeatherForecast.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ScrumTeamService/Services/DepartmentService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ScrumTeamService/Services/DepartmentService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ScrumTeamService/Services/DynamoDbService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ScrumTeamService/Services/DynamoDbService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ScrumTeamService/Services/ScrumOrganizationService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ScrumTeamService/Services/ScrumOrganizationService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ScrumTeamService/Services/ScrumTeamService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ScrumTeamService/Services/ScrumTeamService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ScrumTeamService/Services/TeamMemberService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ScrumTeamService/Services/TeamMemberService.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +28,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/5cdbe642a43f1ba6df1188879b47235ac3e6f938f51736e2fd6a749be667db/ProducesResponseTypeAttribute.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9b282b4fe8c3da0e0e16c9951a932d911f7ba42d46571d9d31ec9ac21268d2d/AbstractValidator.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/c18a666be52c6bfc93d8b2a5e76e3fbaf26a2edc277b511eff7ff35b35cea7/HttpGetAttribute.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
@@ -111,7 +113,7 @@
       <option name="presentableId" value="Default" />
       <updated>1693160512515</updated>
       <workItem from="1693160513691" duration="5306000" />
-      <workItem from="1694184461292" duration="5725000" />
+      <workItem from="1694184461292" duration="7456000" />
     </task>
     <servers />
   </component>
