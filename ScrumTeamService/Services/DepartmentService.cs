@@ -35,7 +35,7 @@ public sealed class DepartmentService : DynamoDbParser<Department>, IDynamoDbCru
 
         var response = await _dynamoDbService.QueryTableAsync(queryRequest);
         
-        return await Task.FromResult(new List<Department>());
+        return GetItemsFromQueryResponse(response.Items);
     }
 
     public override async Task<Department> GetByIdAsync(string id)
@@ -47,9 +47,9 @@ public sealed class DepartmentService : DynamoDbParser<Department>, IDynamoDbCru
 
         var getItemRequest = GetDynamoDbItemRequestForId(id);
 
-        var response = _dynamoDbService.GetItemAsync(getItemRequest);
+        var response = await _dynamoDbService.GetItemAsync(getItemRequest);
         
-        return await Task.FromResult(new Department());
+        return GetObjectFromDynamoDbDictionary(response.Item);
     }
     
     public override async Task CreateAsync(Department department)

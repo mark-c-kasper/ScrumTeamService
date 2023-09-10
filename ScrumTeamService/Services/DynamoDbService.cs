@@ -1,7 +1,5 @@
 using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.Model;
-using ScrumTeamService.Constants;
-using ScrumTeamService.Models;
 
 namespace ScrumTeamService.Services;
 

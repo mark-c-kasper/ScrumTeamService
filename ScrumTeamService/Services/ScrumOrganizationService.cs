@@ -34,7 +34,7 @@ public sealed class ScrumOrganizationService : DynamoDbParser<ScrumOrganization>
         };
 
         var response = await _dynamoDbService.QueryTableAsync(queryRequest);
-        return await Task.FromResult(new List<ScrumOrganization>());
+        return GetItemsFromQueryResponse(response.Items);
     }
 
     public override async Task<ScrumOrganization> GetByIdAsync(string id)
@@ -46,9 +46,9 @@ public sealed class ScrumOrganizationService : DynamoDbParser<ScrumOrganization>
 
         var getItemRequest = GetDynamoDbItemRequestForId(id);
 
-        var response = _dynamoDbService.GetItemAsync(getItemRequest);
+        var response = await _dynamoDbService.GetItemAsync(getItemRequest);
         
-        return await Task.FromResult(new ScrumOrganization());
+        return GetObjectFromDynamoDbDictionary(response.Item);
     }
     
     public override async Task CreateAsync(ScrumOrganization organization)

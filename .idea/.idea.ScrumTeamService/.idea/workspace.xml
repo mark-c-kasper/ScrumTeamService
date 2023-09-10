@@ -9,20 +9,8 @@
   <component name="ChangeListManager">
     <list default="true" id="00a19085-dd30-4db2-aa20-f937ceeb7a73" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ScrumTeamService/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ScrumTeamService/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ScrumTeamService/Controllers/DepartmentController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ScrumTeamService/Controllers/DepartmentController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ScrumTeamService/Controllers/ScrumOrganizationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ScrumTeamService/Controllers/ScrumOrganizationController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ScrumTeamService/Controllers/ScrumTeamController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ScrumTeamService/Controllers/ScrumTeamController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ScrumTeamService/Controllers/TeamMemberController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ScrumTeamService/Controllers/TeamMemberController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ScrumTeamService/Extensions/WebApplicationBuilderExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ScrumTeamService/Extensions/WebApplicationBuilderExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ScrumTeamService/Models/Department.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ScrumTeamService/Models/Department.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ScrumTeamService/Models/ScrumOrganization.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ScrumTeamService/Models/ScrumOrganization.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ScrumTeamService/Models/ScrumTeam.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ScrumTeamService/Models/ScrumTeam.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ScrumTeamService/Models/TeamMember.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ScrumTeamService/Models/TeamMember.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ScrumTeamService/Services/DepartmentService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ScrumTeamService/Services/DepartmentService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ScrumTeamService/Services/IDepartmentService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ScrumTeamService/Services/IScrumOrganizationService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ScrumTeamService/Services/IScrumTeamService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ScrumTeamService/Services/ITeamMemberService.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ScrumTeamService/Services/DynamoDbService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ScrumTeamService/Services/DynamoDbService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ScrumTeamService/Services/ScrumOrganizationService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ScrumTeamService/Services/ScrumOrganizationService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ScrumTeamService/Services/ScrumTeamService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ScrumTeamService/Services/ScrumTeamService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ScrumTeamService/Services/TeamMemberService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ScrumTeamService/Services/TeamMemberService.cs" afterDir="false" />
@@ -134,7 +122,7 @@
       <option name="presentableId" value="Default" />
       <updated>1693160512515</updated>
       <workItem from="1693160513691" duration="5306000" />
-      <workItem from="1694184461292" duration="22600000" />
+      <workItem from="1694184461292" duration="23138000" />
     </task>
     <servers />
   </component>

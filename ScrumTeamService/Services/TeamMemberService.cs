@@ -35,7 +35,7 @@ public sealed class TeamMemberService : DynamoDbParser<TeamMember>, IDynamoDbCru
 
         var response = await _dynamoDbService.QueryTableAsync(queryRequest);
         
-        return this.GetItemsFromQueryResponse(response.Items/*, GetTeamMemberFromDictionary*/);
+        return this.GetItemsFromQueryResponse(response.Items);
     }
 
     public override async Task<TeamMember> GetByIdAsync(string id)
