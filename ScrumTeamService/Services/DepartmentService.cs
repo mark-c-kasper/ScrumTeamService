@@ -6,7 +6,7 @@ using ScrumTeamService.Constants;
 
 namespace ScrumTeamService.Services;
 
-public sealed class DepartmentService : IDepartmentService
+public sealed class DepartmentService : DynamoDbParser<Department>, IDynamoDbCrudService<Department>
 {
     private readonly IDynamoDbService _dynamoDbService;
     
@@ -25,7 +25,7 @@ public sealed class DepartmentService : IDepartmentService
         _validator = validator;
     }
     
-    public async Task<IReadOnlyCollection<Department>> GetAllDepartmentsAsync()
+    public override async Task<IReadOnlyCollection<Department>> GetAllAsync()
     {
         QueryRequest queryRequest = new QueryRequest
         {
@@ -38,7 +38,7 @@ public sealed class DepartmentService : IDepartmentService
         return await Task.FromResult(new List<Department>());
     }
 
-    public async Task<Department> GetDepartmentById(string id)
+    public override async Task<Department> GetByIdAsync(string id)
     {
         if (string.IsNullOrEmpty(id))
         {
@@ -52,7 +52,7 @@ public sealed class DepartmentService : IDepartmentService
         return await Task.FromResult(new Department());
     }
     
-    public async Task CreateDepartmentAsync(Department department)
+    public override async Task CreateAsync(Department department)
     {
         department.ThrowExceptionIfNull(nameof(department));
         await _validator.ValidateAsync(department, ValidationConstants.CreateDepartmentValidationMessage, _logger);
@@ -62,7 +62,7 @@ public sealed class DepartmentService : IDepartmentService
         await _dynamoDbService.PutItemAsync(putItemRequest);
     }
 
-    public async Task UpdateDepartmentAsync(Department department)
+    public override async Task UpdateAsync(Department department)
     {
         department.ThrowExceptionIfNull(nameof(department));
         await _validator.ValidateAsync(department, ValidationConstants.UpdateDepartmentValidationMessage, _logger);
@@ -82,5 +82,14 @@ public sealed class DepartmentService : IDepartmentService
         };
 
         return getItemRequest;
+    }
+    
+    protected override Department GetObjectFromDynamoDbDictionary(Dictionary<string, AttributeValue> responseItem)
+    {
+        return new Department
+        {
+            Id = Guid.Parse(responseItem["Id"].S),
+            Name = responseItem["Name"].S
+        };
     }
 }

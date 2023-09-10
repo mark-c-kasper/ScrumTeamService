@@ -9,10 +9,10 @@ public static class WebApplicationBuilderExtensions
 {
     public static void RegisterServices(this IServiceCollection service)
     {
-        service.AddScoped<IDepartmentService, DepartmentService>();
-        service.AddScoped<IScrumOrganizationService, ScrumOrganizationService>();
-        service.AddScoped<IScrumTeamService, Services.ScrumTeamService>();
-        service.AddScoped<ITeamMemberService, TeamMemberService>();
+        service.AddScoped<IDynamoDbCrudService<Department>, DepartmentService>();
+        service.AddScoped<IDynamoDbCrudService<ScrumOrganization>, ScrumOrganizationService>();
+        service.AddScoped<IDynamoDbCrudService<ScrumTeam>, Services.ScrumTeamService>();
+        service.AddScoped<IDynamoDbCrudService<TeamMember>, TeamMemberService>();
         service.AddScoped<IDynamoDbService, DynamoDbService>();
     }
 

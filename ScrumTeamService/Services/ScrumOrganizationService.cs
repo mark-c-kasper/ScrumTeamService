@@ -6,7 +6,7 @@ using ScrumTeamService.Models;
 
 namespace ScrumTeamService.Services;
 
-public sealed class ScrumOrganizationService : IScrumOrganizationService
+public sealed class ScrumOrganizationService : DynamoDbParser<ScrumOrganization>, IDynamoDbCrudService<ScrumOrganization>
 {
     private readonly IDynamoDbService _dynamoDbService;
     
@@ -24,7 +24,7 @@ public sealed class ScrumOrganizationService : IScrumOrganizationService
         _validator = validator;
     }
     
-    public async Task<IReadOnlyCollection<ScrumOrganization>> GetAllScrumOrganizationsAsync()
+    public override async Task<IReadOnlyCollection<ScrumOrganization>> GetAllAsync()
     {
         
         QueryRequest queryRequest = new QueryRequest
@@ -37,7 +37,7 @@ public sealed class ScrumOrganizationService : IScrumOrganizationService
         return await Task.FromResult(new List<ScrumOrganization>());
     }
 
-    public async Task<ScrumOrganization> GetScrumOrganizationById(string id)
+    public override async Task<ScrumOrganization> GetByIdAsync(string id)
     {
         if (string.IsNullOrEmpty(id))
         {
@@ -51,14 +51,14 @@ public sealed class ScrumOrganizationService : IScrumOrganizationService
         return await Task.FromResult(new ScrumOrganization());
     }
     
-    public async Task CreateScrumOrganizationAsync(ScrumOrganization organization)
+    public override async Task CreateAsync(ScrumOrganization organization)
     {
         organization.ThrowExceptionIfNull(nameof(organization));
         await _validator.ValidateAsync(organization, ValidationConstants.CreateScrumOrganizationValidationMessage, _logger);
         
     }
 
-    public async Task UpdateScrumOrganizationAsync(ScrumOrganization organization)
+    public override async Task UpdateAsync(ScrumOrganization organization)
     {
         organization.ThrowExceptionIfNull(nameof(organization));
         await _validator.ValidateAsync(organization, ValidationConstants.UpdateScrumOrganizationValidationMessage, _logger);
@@ -74,5 +74,14 @@ public sealed class ScrumOrganizationService : IScrumOrganizationService
         };
 
         return getItemRequest;
+    }
+
+    protected override ScrumOrganization GetObjectFromDynamoDbDictionary(Dictionary<string, AttributeValue> responseItem)
+    {
+        return new ScrumOrganization
+        {
+            Id = Guid.Parse(responseItem["Id"].S),
+            Name = responseItem["Name"].S
+        };
     }
 }

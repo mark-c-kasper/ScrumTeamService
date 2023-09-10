@@ -9,11 +9,11 @@ namespace ScrumTeamService.Controllers;
 [Route("api/[controller]/[action]")]
 public sealed class DepartmentController : ControllerBase
 {
-    private readonly IDepartmentService _departmentService;
+    private readonly IDynamoDbCrudService<Department> _departmentService;
     
     private readonly ILogger<DepartmentController> _logger;
 
-    public DepartmentController(IDepartmentService departmentService, ILogger<DepartmentController> logger)
+    public DepartmentController(IDynamoDbCrudService<Department> departmentService, ILogger<DepartmentController> logger)
     {
         _departmentService = departmentService;
         _logger = logger;
@@ -25,7 +25,7 @@ public sealed class DepartmentController : ControllerBase
     {
         try
         {
-            IReadOnlyCollection<Department> departments = await _departmentService.GetAllDepartmentsAsync();
+            IReadOnlyCollection<Department> departments = await _departmentService.GetAllAsync();
             return Ok(departments);
         }
         catch(Exception exception)
@@ -41,7 +41,7 @@ public sealed class DepartmentController : ControllerBase
     {
         try
         {
-            Department department = await _departmentService.GetDepartmentById(id);
+            Department department = await _departmentService.GetByIdAsync(id);
             return Ok(department);
         }
         catch(Exception exception)
@@ -56,7 +56,7 @@ public sealed class DepartmentController : ControllerBase
     {
         try
         {
-            await _departmentService.CreateDepartmentAsync(department);
+            await _departmentService.CreateAsync(department);
             return Ok();
         }
         catch(Exception exception)
@@ -71,7 +71,7 @@ public sealed class DepartmentController : ControllerBase
     {
         try
         {
-            await _departmentService.UpdateDepartmentAsync(department);
+            await _departmentService.UpdateAsync(department);
             return Ok();
         }
         catch(Exception exception)

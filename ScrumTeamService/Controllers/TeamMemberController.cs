@@ -9,11 +9,11 @@ namespace ScrumTeamService.Controllers;
 [Route("api/[controller]/[action]")]
 public sealed class TeamMemberController : ControllerBase
 {
-    private readonly ITeamMemberService _teamMemberService;
+    private readonly IDynamoDbCrudService<TeamMember> _teamMemberService;
     
     private readonly ILogger<TeamMemberController> _logger;
 
-    public TeamMemberController(ITeamMemberService teamMemberService, ILogger<TeamMemberController> logger)
+    public TeamMemberController(IDynamoDbCrudService<TeamMember> teamMemberService, ILogger<TeamMemberController> logger)
     {
         _teamMemberService = teamMemberService;
         _logger = logger;
@@ -25,7 +25,7 @@ public sealed class TeamMemberController : ControllerBase
     {
         try
         {
-            IReadOnlyCollection<TeamMember> teamMembers = await _teamMemberService.GetAllTeamMembersAsync();
+            IReadOnlyCollection<TeamMember> teamMembers = await _teamMemberService.GetAllAsync();
             return Ok(teamMembers);
         }
         catch(Exception exception)
@@ -41,7 +41,7 @@ public sealed class TeamMemberController : ControllerBase
     {
         try
         {
-            TeamMember teamMember = await _teamMemberService.GetTeamMemberById(id);
+            TeamMember teamMember = await _teamMemberService.GetByIdAsync(id);
             return Ok(teamMember);
         }
         catch(Exception exception)
@@ -56,7 +56,7 @@ public sealed class TeamMemberController : ControllerBase
     {
         try
         {
-            await _teamMemberService.CreateTeamMemberAsync(teamMember);
+            await _teamMemberService.CreateAsync(teamMember);
             return Ok(teamMember);
         }
         catch(Exception exception)
@@ -71,7 +71,7 @@ public sealed class TeamMemberController : ControllerBase
     {
         try
         {
-            await _teamMemberService.UpdateTeamMemberAsync(teamMember);
+            await _teamMemberService.UpdateAsync(teamMember);
             return Ok(teamMember);
         }
         catch(Exception exception)

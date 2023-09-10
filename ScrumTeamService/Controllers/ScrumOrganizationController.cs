@@ -9,11 +9,11 @@ namespace ScrumTeamService.Controllers;
 [Route("api/[controller]/[action]")]
 public sealed class ScrumOrganizationController : ControllerBase
 {
-    private readonly IScrumOrganizationService _scrumOrganizationService;
+    private readonly IDynamoDbCrudService<ScrumOrganization> _scrumOrganizationService;
     
     private readonly ILogger<ScrumOrganizationController> _logger;
 
-    public ScrumOrganizationController(IScrumOrganizationService scrumOrganizationService,
+    public ScrumOrganizationController(IDynamoDbCrudService<ScrumOrganization> scrumOrganizationService,
         ILogger<ScrumOrganizationController> logger)
     {
         _scrumOrganizationService = scrumOrganizationService;
@@ -26,7 +26,7 @@ public sealed class ScrumOrganizationController : ControllerBase
     {
         try
         {
-            IReadOnlyCollection<ScrumOrganization> departments = await _scrumOrganizationService.GetAllScrumOrganizationsAsync();
+            IReadOnlyCollection<ScrumOrganization> departments = await _scrumOrganizationService.GetAllAsync();
             return Ok(departments);
         }
         catch(Exception exception)
@@ -42,7 +42,7 @@ public sealed class ScrumOrganizationController : ControllerBase
     {
         try
         {
-            ScrumOrganization departments = await _scrumOrganizationService.GetScrumOrganizationById(id);
+            ScrumOrganization departments = await _scrumOrganizationService.GetByIdAsync(id);
             return Ok(departments);
         }
         catch(Exception exception)
@@ -57,7 +57,7 @@ public sealed class ScrumOrganizationController : ControllerBase
     {
         try
         {
-            await _scrumOrganizationService.CreateScrumOrganizationAsync(organization);
+            await _scrumOrganizationService.CreateAsync(organization);
             return Ok();
         }
         catch(Exception exception)
@@ -72,7 +72,7 @@ public sealed class ScrumOrganizationController : ControllerBase
     {
         try
         {
-            await _scrumOrganizationService.UpdateScrumOrganizationAsync(organization);
+            await _scrumOrganizationService.UpdateAsync(organization);
             return Ok();
         }
         catch(Exception exception)

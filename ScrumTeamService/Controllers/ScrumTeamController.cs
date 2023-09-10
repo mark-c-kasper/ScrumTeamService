@@ -9,11 +9,11 @@ namespace ScrumTeamService.Controllers;
 [Route("api/[controller]/[action]")]
 public sealed class ScrumTeamController : ControllerBase
 {
-    private readonly IScrumTeamService _scrumTeamService;
+    private readonly IDynamoDbCrudService<ScrumTeam> _scrumTeamService;
     
     private readonly ILogger<ScrumTeamController> _logger;
 
-    public ScrumTeamController(IScrumTeamService scrumTeamService, ILogger<ScrumTeamController> logger)
+    public ScrumTeamController(IDynamoDbCrudService<ScrumTeam> scrumTeamService, ILogger<ScrumTeamController> logger)
     {
         _scrumTeamService = scrumTeamService;
         _logger = logger;
@@ -25,7 +25,7 @@ public sealed class ScrumTeamController : ControllerBase
     {
         try
         {
-            IReadOnlyCollection<ScrumTeam> departments = await _scrumTeamService.GetAllScrumTeamsAsync();
+            IReadOnlyCollection<ScrumTeam> departments = await _scrumTeamService.GetAllAsync();
             return Ok(departments);
         }
         catch(Exception exception)
@@ -41,7 +41,7 @@ public sealed class ScrumTeamController : ControllerBase
     {
         try
         {
-            ScrumTeam departments = await _scrumTeamService.GetScrumTeamById(id);
+            ScrumTeam departments = await _scrumTeamService.GetByIdAsync(id);
             return Ok(departments);
         }
         catch(Exception exception)
@@ -56,7 +56,7 @@ public sealed class ScrumTeamController : ControllerBase
     {
         try
         {
-            await _scrumTeamService.CreateScrumTeamAsync(scrumTeam);
+            await _scrumTeamService.CreateAsync(scrumTeam);
             return Ok();
         }
         catch(Exception exception)
@@ -71,7 +71,7 @@ public sealed class ScrumTeamController : ControllerBase
     {
         try
         {
-            await _scrumTeamService.UpdateScrumTeamAsync(scrumTeam);
+            await _scrumTeamService.UpdateAsync(scrumTeam);
             return Ok();
         }
         catch(Exception exception)

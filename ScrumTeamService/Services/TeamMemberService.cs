@@ -6,7 +6,7 @@ using ScrumTeamService.Models;
 
 namespace ScrumTeamService.Services;
 
-public sealed class TeamMemberService : ITeamMemberService
+public sealed class TeamMemberService : DynamoDbParser<TeamMember>, IDynamoDbCrudService<TeamMember>
 {
     private readonly IDynamoDbService _dynamoDbService;
     
@@ -25,7 +25,7 @@ public sealed class TeamMemberService : ITeamMemberService
         _validator = validator;
     }
     
-    public async Task<IReadOnlyCollection<TeamMember>> GetAllTeamMembersAsync()
+    public override async Task<IReadOnlyCollection<TeamMember>> GetAllAsync()
     {
         QueryRequest queryRequest = new QueryRequest
         {
@@ -34,10 +34,11 @@ public sealed class TeamMemberService : ITeamMemberService
         };
 
         var response = await _dynamoDbService.QueryTableAsync(queryRequest);
-        return await Task.FromResult(new List<TeamMember>());
+        
+        return this.GetItemsFromQueryResponse(response.Items/*, GetTeamMemberFromDictionary*/);
     }
 
-    public async Task<TeamMember> GetTeamMemberById(string id)
+    public override async Task<TeamMember> GetByIdAsync(string id)
     {
         if (string.IsNullOrEmpty(id))
         {
@@ -46,18 +47,18 @@ public sealed class TeamMemberService : ITeamMemberService
 
         var getItemRequest = GetDynamoDbItemRequestForId(id);
 
-        var response = _dynamoDbService.GetItemAsync(getItemRequest);
+        var response = await _dynamoDbService.GetItemAsync(getItemRequest);
         
-        return await Task.FromResult(new TeamMember());
+        return GetObjectFromDynamoDbDictionary(response.Item);
     }
     
-    public async Task CreateTeamMemberAsync(TeamMember teamMember)
+    public override async Task CreateAsync(TeamMember teamMember)
     {
         teamMember.ThrowExceptionIfNull(nameof(teamMember));
         await _validator.ValidateAsync(teamMember, ValidationConstants.CreateTeamMemberValidationMessage, _logger);
     }
 
-    public async Task UpdateTeamMemberAsync(TeamMember teamMember)
+    public override async Task UpdateAsync(TeamMember teamMember)
     {
         teamMember.ThrowExceptionIfNull(nameof(teamMember));
         await _validator.ValidateAsync(teamMember, ValidationConstants.UpdateTeamMemberValidationMessage, _logger);
@@ -73,5 +74,19 @@ public sealed class TeamMemberService : ITeamMemberService
         };
 
         return getItemRequest;
+    }
+
+    protected override TeamMember GetObjectFromDynamoDbDictionary(Dictionary<string, AttributeValue> responseItem)
+    {
+        return new TeamMember
+        {
+            Id = Guid.Parse(responseItem["Id"].S),
+            LastName = responseItem["LastName"].S,
+            FirstName = responseItem["FirstName"].S,
+            Position = responseItem["Position"].S,
+            Salary = decimal.Parse(responseItem["Salary"].N),
+            DepartmentId = Guid.Parse(responseItem["DepartmentId"].S),
+            TeamId = Guid.Parse(responseItem["TeamId"].S),
+        };
     }
 }

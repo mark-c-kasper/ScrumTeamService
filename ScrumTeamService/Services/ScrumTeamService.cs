@@ -6,7 +6,7 @@ using ScrumTeamService.Models;
 
 namespace ScrumTeamService.Services;
 
-public sealed class ScrumTeamService : IScrumTeamService
+public sealed class ScrumTeamService : DynamoDbParser<ScrumTeam>, IDynamoDbCrudService<ScrumTeam>
 {
     private readonly IDynamoDbService _dynamoDbService;
     
@@ -24,7 +24,7 @@ public sealed class ScrumTeamService : IScrumTeamService
         _validator = validator;
     }
     
-    public async Task<IReadOnlyCollection<ScrumTeam>> GetAllScrumTeamsAsync()
+    public override async Task<IReadOnlyCollection<ScrumTeam>> GetAllAsync()
     {
         QueryRequest queryRequest = new QueryRequest
         {
@@ -36,7 +36,7 @@ public sealed class ScrumTeamService : IScrumTeamService
         return await Task.FromResult(new List<ScrumTeam>());
     }
 
-    public async Task<ScrumTeam> GetScrumTeamById(string id)
+    public override async Task<ScrumTeam> GetByIdAsync(string id)
     {
         if (string.IsNullOrEmpty(id))
         {
@@ -50,14 +50,14 @@ public sealed class ScrumTeamService : IScrumTeamService
         return await Task.FromResult(new ScrumTeam());
     }
     
-    public async Task CreateScrumTeamAsync(ScrumTeam scrumTeam)
+    public override async Task CreateAsync(ScrumTeam scrumTeam)
     {
         scrumTeam.ThrowExceptionIfNull(nameof(scrumTeam));
         
         await _validator.ValidateAsync(scrumTeam, ValidationConstants.CreateScrumTeamValidationMessage, _logger);
     }
 
-    public async Task UpdateScrumTeamAsync(ScrumTeam scrumTeam)
+    public override async Task UpdateAsync(ScrumTeam scrumTeam)
     {
         scrumTeam.ThrowExceptionIfNull(nameof(scrumTeam));
         
@@ -74,5 +74,15 @@ public sealed class ScrumTeamService : IScrumTeamService
         };
 
         return getItemRequest;
+    }
+
+    protected override ScrumTeam GetObjectFromDynamoDbDictionary(Dictionary<string, AttributeValue> responseItem)
+    {
+        return new ScrumTeam
+        {
+            Id = Guid.Parse(responseItem["Id"].S),
+            Name = responseItem["Name"].S,
+            OrganizationId = Guid.Parse(responseItem["OrganizationId"].S),
+        };
     }
 }

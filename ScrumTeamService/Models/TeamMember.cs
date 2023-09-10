@@ -1,6 +1,6 @@
 namespace ScrumTeamService.Models;
 
-public class TeamMember
+public class TeamMember : IDynamoDbParseable
 {
     public Guid Id { get; init; }
 

@@ -1,6 +1,6 @@
 namespace ScrumTeamService.Models;
 
-public sealed class ScrumOrganization
+public sealed class ScrumOrganization : IDynamoDbParseable
 {
     public Guid Id { get; init; }
 
