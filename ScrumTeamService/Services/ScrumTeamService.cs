@@ -6,7 +6,7 @@ using ScrumTeamService.Models;
 
 namespace ScrumTeamService.Services;
 
-public sealed class ScrumTeamService : DynamoDbParser<ScrumTeam>, IDynamoDbCrudService<ScrumTeam>
+public sealed class ScrumTeamService : DynamoDbCrudService<ScrumTeam>, IDynamoDbCrudService<ScrumTeam>
 {
     private readonly IDynamoDbService _dynamoDbService;
     

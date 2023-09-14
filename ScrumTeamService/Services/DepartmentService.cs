@@ -6,7 +6,7 @@ using ScrumTeamService.Constants;
 
 namespace ScrumTeamService.Services;
 
-public sealed class DepartmentService : DynamoDbParser<Department>, IDynamoDbCrudService<Department>
+public sealed class DepartmentService : DynamoDbCrudService<Department>, IDynamoDbCrudService<Department>
 {
     private readonly IDynamoDbService _dynamoDbService;
     

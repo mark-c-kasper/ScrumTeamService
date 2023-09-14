@@ -3,7 +3,7 @@ using ScrumTeamService.Models;
 
 namespace ScrumTeamService.Services;
 
-public abstract class DynamoDbParser<T> : IDynamoDbCrudService<T> where T: IDynamoDbParseable
+public abstract class DynamoDbCrudService<T> : IDynamoDbCrudService<T> where T: IDynamoDbParseable
 {
     protected List<T> GetItemsFromQueryResponse(List<Dictionary<string, AttributeValue>> responseItems) 
     {
