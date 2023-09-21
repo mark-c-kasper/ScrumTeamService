@@ -27,13 +27,13 @@ public sealed class DepartmentService : DynamoDbCrudService<Department>, IDynamo
     
     public override async Task<IReadOnlyCollection<Department>> GetAllAsync()
     {
-        QueryRequest queryRequest = new QueryRequest
+        ScanRequest scanRequest = new ScanRequest
         {
             TableName = DynamoDbConstants.DepartmentsTableName,
             AttributesToGet = DepartmentAttributesToGet
         };
 
-        var response = await _dynamoDbService.QueryTableAsync(queryRequest);
+        var response = await _dynamoDbService.ScanTableAsync(scanRequest);
         
         return GetItemsFromQueryResponse(response.Items);
     }
@@ -77,7 +77,7 @@ public sealed class DepartmentService : DynamoDbCrudService<Department>, IDynamo
         var getItemRequest = new GetItemRequest
         {
             TableName = DynamoDbConstants.DepartmentsTableName,
-            Key = {{ "Id", new AttributeValue(id)}},
+            Key = {{ "Id", new AttributeValue {S = id}}},
             AttributesToGet = DepartmentAttributesToGet
         };
 

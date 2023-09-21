@@ -9,4 +9,6 @@ public interface IDynamoDbService
     Task<GetItemResponse> GetItemAsync(GetItemRequest getItemRequest);
 
     Task<QueryResponse> QueryTableAsync(QueryRequest queryRequest);
+
+    Task<ScanResponse> ScanTableAsync(ScanRequest scanRequest);
 }

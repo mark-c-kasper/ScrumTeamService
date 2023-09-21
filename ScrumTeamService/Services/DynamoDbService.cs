@@ -1,11 +1,13 @@
 using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.Model;
+using Microsoft.Extensions.Options;
+using ScrumTeamService.Models;
 
 namespace ScrumTeamService.Services;
 
 public sealed class DynamoDbService : IDynamoDbService
 {
-    private ILogger<DynamoDbService> _logger;
+    private readonly ILogger<DynamoDbService> _logger;
     
     public DynamoDbService(ILogger<DynamoDbService> logger)
     {
@@ -66,6 +68,27 @@ public sealed class DynamoDbService : IDynamoDbService
         try
         {
             var response = await amazonDynamoDbClient.QueryAsync(queryRequest);
+            return response;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Exception querying table from DynamoDb");
+            throw;
+        }
+    }
+
+    public async Task<ScanResponse> ScanTableAsync(ScanRequest scanRequest)
+    {
+        if (scanRequest is null)
+        {
+            throw new ArgumentNullException(nameof(scanRequest));
+        }
+        
+        using AmazonDynamoDBClient amazonDynamoDbClient = new AmazonDynamoDBClient();
+
+        try
+        {
+            var response = await amazonDynamoDbClient.ScanAsync(scanRequest);
             return response;
         }
         catch (Exception ex)
